@@ -1,0 +1,12 @@
+## Aumentare memoria disponibile per Tomcat in Eclipse
+Scheda Server > doppio click sul server da modificare > sezione General Information > cliccare Open Launch Configuration > scheda Arguments > sezione VM arguments > -XX:PermSize=256m -XX:MaxPermSize=256m
+
+## Tomcat
+> Creare la variabile di ambiente
+>> set CATALINA_HOME=<percorso_cartella_tomcat>
+> Avviare tomcat
+>> %CATALINA_HOME%\bin\startup.bat
+> Da un browser, verificare l'esecuzione di tomacat all'indirizzo http://localhost:8080
+> Spegnere tomcat
+>> %CATALINA_HOME%\bin\shutdown
+!!! ATTENZIONE: tomcat e glassfish vanno in conflitto

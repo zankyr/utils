@@ -1,0 +1,70 @@
+﻿public static String encryptString(String text, String key) {
+		// Create key and cipher
+		Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+		Cipher cipher;
+		try {
+			cipher = Cipher.getInstance("AES");
+			// encrypt the text
+			cipher.init(Cipher.ENCRYPT_MODE, aesKey);
+			byte[] encrypted = cipher.doFinal(text.getBytes());
+			byte[] encryptedByteValue = org.apache.commons.net.util.Base64.encodeBase64URLSafe(encrypted);
+
+			String encryptedString = new String(encryptedByteValue);
+
+			return encryptedString;
+
+		} catch (Exception e) {
+			log.error("Errore in fase di criptazione messaggio: ", e);
+		}
+		return null;
+	}
+
+	public static String decryptString(String encryptedString, String key) {
+
+		Cipher cipher;
+		Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+		try {
+			byte[] encryptedBytes = org.apache.commons.net.util.Base64.decodeBase64(encryptedString.getBytes());
+
+			cipher = Cipher.getInstance("AES");
+			cipher.init(Cipher.DECRYPT_MODE, aesKey);
+			String decryptedString = new String(cipher.doFinal(encryptedBytes));
+
+			return decryptedString;
+
+		} catch (Exception e) {
+			log.error("Errore in fase di decriptazione messaggio: ", e);
+		}
+		return null;
+	}
+
+	/**
+	 * "Maschera" il customer number per non mostrarlo in chiaro nello URL,
+	 * codificandolo con AES. Per rendere più casuale la cosa, maschero il cn
+	 * con timestamp e stringa casuale
+	 * 
+	 * @param text
+	 *            {@link String} che si vuole cifrare
+	 * @param key
+	 *            {@link String} chiave da utilizzare. Deve essere di 16 byte
+	 * @return {@link String} cifrata con AES e codificata in base 64
+	 */
+	public static String encryptStringForURL(String text, String key) {
+
+		text = new SimpleDateFormat(URL_DATE_FORMAT).format(System.currentTimeMillis())
+				+ RandomStringUtils.randomAlphanumeric(URL_RANDOM_STRING_LENGTH) + text;
+
+		return encryptString(text, key);
+	}
+
+	public static String decryptStringForURL(String encryptedString, String key) {
+
+		String decryptedString = decryptString(encryptedString, key);
+
+		if (org.apache.commons.lang3.StringUtils.isNotBlank(decryptedString))
+			return decryptedString
+					.substring(new SimpleDateFormat(URL_DATE_FORMAT).format(System.currentTimeMillis()).length()
+							+ URL_RANDOM_STRING_LENGTH);
+
+		return null;
+	}

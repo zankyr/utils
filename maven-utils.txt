@@ -1,0 +1,31 @@
+(https://examples.javacodegeeks.com/enterprise-java/maven/apache-maven-eclipse-integration-tutorial/)
+
+# Maven Win config
+In Enviroment Variables, creare una variabile (sistema? user?) specificando la cartella di installazione di Maven
+|- M2_HOME per Maven 2.x e 3.x
+|_ MAVEN_HOME per Maven 1.x
+
+
+
+# Errore Received fatal alert: protocol_version
+Aggiungere agli argomenti della VM il seguente parametro
+-Dhttps.protocols=TLSv1.2
+
+## Creazione di un nuovo modulo con Maven
+1 - scaricare su filesystem tutta la current (repository, svn) del porgetto
+2 - eseguire comando maven 
+	quick ==> mvn archetype:generate -DgroupId=it.bricocenter.carta -DartifactId=ums-ws-client -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+	webapp ==> mvn archetype:create -DarchetypeArtifactId=maven-archetype-webapp
+3 - Committare la nuova cartella
+4 - Update (eclipse)
+5 - Import (eclipse)
+
+
+
+ATTENZIONE: se al progetto (importato in Eclipse) manca la cartella src/main/java, fare click con il tasto destro sul progetto > build path > configure build path. Portarsi sulla scheda Order and Export, dovrebbero essere segnalate due percorsi mancanti (src/main/java e src/test/java). Selezionare JRE System Library e Maven Dependencies, cliccare Apply e poi OK. Ora le due cartelle dovrebbero essere comparse nel progetto
+
+NOTA: per la creazione dei nuovi moduli, scarica la current su filesystem, lancia il comando maven, fai la commit, fai update in Eclipse e import.
+
+
+https://svnfir.gft.com/svn/PROD/Products/Brico/Carta%20Bricocenter%20GFT/Documentazione
+

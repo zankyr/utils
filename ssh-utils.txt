@@ -1,0 +1,15 @@
+
+
+# Add this to .bash_profile or .bashrc to insert git password only at the start of the terminal
+eval `ssh-agent`
+ssh-add
+
+
+.bash_profile file runs the ssh-agent:
+
+eval $(ssh-agent)
+Then I set up an ssh configuration file like this:
+
+touch ~/.ssh/config
+chmod 600 ~/.ssh/config
+echo 'AddKeysToAgent yes' >> ~/.ssh/config

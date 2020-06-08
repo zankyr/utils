@@ -1,0 +1,10 @@
+# Cambiare tema
+Settings > Style Configurator...
+Selezionare i temi dalla tendina e modificarli a piacere
+
+# Aggiungere tema
+Scaricare il tema desiderato (dovrà essere un file .xml)
+Andare nella cartella di installazione di notepad: C:\Program Files (x86)\Notepad++
+Creare la cartella themes se non presente
+Copiare il file xml nella cartella themes
+Riavviare notepad++ e seguire la procedura del punto "Cambiare tema"

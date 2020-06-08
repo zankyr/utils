@@ -1,0 +1,35 @@
+# history di git
+git log
+
+# history sul singolo file
+git log <file/path>
+
+# history dettagliata (con modifiche effettuate)
+git log -p 
+
+
+git reset --soft HEAD^ 
+git reset HEAD path/to/unwanted_file
+git commit -c ORIG_HEAD  
+
+
+# Sincronizzare branch remota con locale
+git branch --set-upstream-to=origin/master
+git pull --allow-unrelated-histories
+ 
+# Reset file (not yet staged)
+git checkout -- <file> // ALL CHANGES WILL BE DISCARDED
+
+# Unstage file
+git reset HEAD <file>
+
+# Remove staged file
+git rm --cached <file>
+
+# Fixing untracked files
+git rm -r --cached . // N.B. removes all the files from git
+git add .
+git commit -m "fixed untracked files"
+
+# Create new branch and checkout it
+git checkout -b <branch-name>

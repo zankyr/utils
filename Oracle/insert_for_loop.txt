@@ -1,0 +1,38 @@
+﻿-- Serve per loggare nella shell del renamDBMS
+SET SERVEROUTPUT ON
+
+DECLARE
+      insert_query varchar2(500);
+      select_query varchar2(255);
+      
+      store_id INTEGER;
+      store_cod VARCHAR2(3);
+      ldap_cod VARCHAR2(255);
+      user_id INTEGER;
+      phone_id INTEGER;
+  
+BEGIN
+
+    FOR store IN (SELECT id, substr(cod_negozio, 2) as cod_negozio FROM GCM_STORE) LOOP
+    
+        store_id := store.id;
+        store_cod := store.cod_negozio;
+        ldap_cod := '40013902_' || store_cod;
+        
+        DBMS_OUTPUT.PUT_LINE('Store id: ' || store_id || '- Store cod: ' || store_cod || '- LDAP: ' || ldap_cod );
+        
+        insert_query := 'Insert into gcm_user (ID,USERNAME,PASSWORD,NAME,SURNAME,EMAIL,PHONE,GCM_ROLE_ID,REGION_CODE,UTENZA_LOCALE,DATA_FINE_VALIDITA,COD_CARTA) values (gcm_seq_user.nextval,''' || ldap_cod || ''',''bricodem'',''Cristina'',''Carbonaro'',''cristina.carbonaro@bricocenter.it'',' || store_id || ',''1'',null,''1'',null,''00119'')';
+        
+        DBMS_OUTPUT.PUT_LINE(insert_query);
+        
+        execute immediate insert_query;
+        
+        select gcm_user.id, gcm_user.phone INTO user_id, phone_id from gcm_user where gcm_user.phone = store_id;
+        
+        DBMS_OUTPUT.PUT_LINE('User id: ' || user_id || '- Phone: ' || phone_id);
+        
+        insert into gcm_user_store(GCM_USER_ID,GCM_STORE_ID) values (user_id,phone_id);
+    
+    
+    END LOOP;
+END;

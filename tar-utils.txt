@@ -1,0 +1,27 @@
+# Creare archivio 
+tar -cvf Aggiornamento_2018-02-08.tar iniziative.war
+
+tar -cvzf Aggiornamento_2018-02-08.tgz iniziative.war (compresso gzip)
+tar -cvzf Aggiornamento_2018-02-08.tar.gz iniziative.war (compresso gzip)
+
+tar -cvjf Aggiornamento_2018-02-08.bz2 iniziative.war (compresso bz2)
+tar -cvjf Aggiornamento_2018-02-08.tar.tbz iniziative.war (compresso bz2)
+tar -cvjf Aggiornamento_2018-02-08.tar.tb2 iniziative.war (compresso bz2)
+
+# Aggiungere file/cartelle ad archivio (non funziona con archivi compressi)
+tar -rvf <archivio.tar> <file>
+
+
+# Decomprimere archivio
+tar -xvf Aggiornamento_2018-02-08.<estensione> [-C <directory>] (uguale per tutte le versioni)
+
+# Estrarre singolo file da archivio
+tar --extract --file=<archivio.estenzione> <file> (uguale per tutte le versioni)
+
+tar -xvf <archivio.tar> <file>
+tar -zxvf <archivio.tgz> <file>
+tar -jxvf <archivio.bz2> <file>
+
+
+# Visualizzare file in archivio
+tar -tvf Aggiornamento_2018-02-08.<estensione> (uguale per tutte le versioni)

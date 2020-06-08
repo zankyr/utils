@@ -1,0 +1,63 @@
+cp flussi_201703{18,19,20,21}_{0506,0453,0032,0391}.zip ~
+
+for FILENAME in *.*; do mv "$FILENAME" "${FILENAME%.*}";  done
+
+
+
+# Cartelle che non contengono il file meta.xml
+find . -mindepth 1 -maxdepth 1 -type d '!' -exec test -e "{}/meta.xml" ';' -print
+
+# Eliminare file vuoti (dimensione 0)
+find . -size 0 -print0 | xargs -0 rm
+
+# Cercare file che contengono una certa stringa
+grep -r somethingtosearch temp/*.log
+grep -Ril "specific_text" directory
+
+-l specifica di mostrare solo il nome del file e non la riga che contiene il target
+-R, -r specifica di effettuare le ricerca ricorsiva. -r non è supportato da tutte le versioni di grep, 
+		e non segue i link simbolici
+		
+# Visualizzare variabili di ambiente
+env
+
+# Definire una variabile di sessione (avrà validità solo nella sessione attuale)
+export VARIABILE="valore"
+export VARIABILE=$VARIABILE:<percorso>
+
+# Zip di una cartella
+zip -r prova.zip /home/gcm04/gcm/current/layout/layout_unzip/33a84a54-3cff-4e0c-ae0a-be1ed7299ed9
+
+Info distro: 
+$ lsb_release -a
+$ cat /etc/issue
+$ cat /etc/issue.net
+$ cat centos-release (CentOS)
+
+Architecture info
+$ uname -a
+$ uname -i
+
+
+
+# Installare sudo
+> Loggarsi come root
+> apt install sudo
+
+# Modificare /etc/sudoers
+$ visudo
+
+
+# Cambiare editor
+$ update-alternatives --config editor
+
+# Specfificare vim come editor per crontab
+export VISUAL=vim
+(oppure)
+export EDITOR=vim
+
+# SCP
+scp carta.bricocenter.it.csr cb01@10.34.3.133:~
+
+# Copiare file da subdirectory
+find archive/ -iname "*.war" -type f -exec cp '{}' ./ \;

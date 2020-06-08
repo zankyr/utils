@@ -1,0 +1,40 @@
+## SHORTCUT PER CARTELLE
+alias C='cd ~/gcm/current/conf'
+alias F='cd /home/gcm01/flussi'
+alias L='cd ~/gcm/current/logs/'
+
+## SHORTCUT PER FILE DI LOG
+alias log1='less ~/gcm/current/logs/invio_camp_batch_1.log'
+alias logc='less ~/gcm/current/logs/catalina.out'
+alias logo='less ~/gcm/current/logs/output.log'
+
+## LS
+alias ls='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias ld='ls -d */ --color=auto' # lista cartelle
+alias l.='ls -d .* --color=auto' # lista cartelle e file nascosti
+  
+## LESS
+alias less='less -N' # visualizzare numeri di riga
+
+## SCRIPT
+alias deploy='/opt/bin/deploy.sh'
+alias startTomcat='~/gcm/bin/startTomcat.sh'
+alias stopTomcat='~/gcm/bin/stopTomcat.sh'
+
+## SFTP
+alias sftp_mapp='sftp bricocenter_it@ftp.email.bricocenter.it'
+alias sftp_mapp='sftp bricocenter_it@91.192.43.134'
+
+## PS
+alias psjava='ps -ef | grep java'
+
+## ROT13
+alias rot13='tr '\''A-Za-z'\'' '\''N-ZA-Mn-za-m'\'''
+
+# VI/VIM
+alias vi='vim'
+
+# WHICH
+alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+

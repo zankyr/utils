@@ -1,0 +1,17 @@
+## Verificare se oggetto esiste (equivalente di select 1)
+
+
+  session = sessionFactory.openSession();
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(Users.class);
+    criteria.add(Restrictions.eq("Id", Id));
+    criteria.setProjection(Projections.rowCount());
+    long count = (Long) criteria.uniqueResult();
+    session.getTransaction().commit();
+   if(count != 0){
+       System.out.println("present");
+   else{
+       System.out.println("absent");
+   }
+   
+# Creare query "secca"

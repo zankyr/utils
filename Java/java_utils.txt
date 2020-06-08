@@ -1,0 +1,19 @@
+﻿## Creazione oggetti
+Integer.valueOf è preferibile rispetto a new Integer() perchè il secondo metodo crea ogni volta un oggetto nuovo, mentre il primo permette il caching
+
+## Rimuovere oggetti da lista 
+List<String> temp = ...;
+for (Iterator<String> iterator = temp.iterator(); iterator.hasNext();) {
+	String s = iterator.next();
+	...
+	iterator.remove();
+	...
+}
+
+# Convertire array in lista
+Resource[] resources = ...;
+List<Resource> temp = new ArrayList<>(Arrays.asList(resources));
+
+# Convertire lista in array
+List<Resource> temp = ...;
+Resource[] resources = temp.toArray(new Resource[temp.size()]);
