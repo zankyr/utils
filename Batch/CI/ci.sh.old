@@ -1,0 +1,103 @@
+#!/bin/bash
+
+SOURCE_HOME=/root/CI/source
+
+LOGS_HOME=/root/CI/logs
+LOG_TIMESTAMP=`date '+%Y%m%d_%H%M%S'`
+LOG_FILE=bpm-ist-CI-${LOG_TIMESTAMP}.log
+
+BUILD_HOME=${SOURCE_HOME}/current/bpm
+MAIL_ADDRESS="enrico.destefanis@sempla.it carla.disantis@sempla.it alfonso.scoppetta@sempla.it"
+MAIL_SUBJECT="${HOSTNAME} - Errore CI"
+SVN_ADDRESS_IST="https://cm.sempla.it/svn/BANK/BPM/BPM-IST/CODICE/current"
+SVN_ADDRESS_COM="https://cm.sempla.it/svn/BANK/BPM/BPM-IST/CODICE/current"
+SVN_ADDRESS=""
+
+DEPLOY_USERS[0]="bpm-author"
+DEPLOY_USERS[1]="bpm-public"
+
+PROJECT_NAME="bpm-webapp"
+
+function selectSVN {
+	echo "[selectSVN] - Selezione dell'svn:"
+
+	if [ $AMBIENTE == "IST" ]
+	then
+		SVN_ADDRESS=$SVN_ADDRESS_IST
+		BUILD_HOME=${SOURCE_HOME}/current/bpm
+	else
+		SVN_ADDRESS=$SVN_ADDRESS_COM
+		BUILD_HOME=${SOURCE_HOME}/current/bpm
+	fi
+
+	echo "[selectSVN] - Svn selezionato: $SVN_ADDRESS"
+}
+
+function clean_deploy_dir {
+	echo "[clean_deploy_dir] - pulizia cartelle di deploy"
+      	for user in ${DEPLOY_USERS[*]}
+    	do
+		echo "[clean_deploy_dir] - Pulizia dei war nella cartella /home/${user}/CI/"
+       	rm -rf  /home/${user}/CI/*.war
+    	done
+
+}
+
+function checkout_project {
+	echo "[checkout_project] - Pulizia della cartella con i sorgenti"
+	rm -rf ${SOURCE_HOME}/*
+	echo "[checkout_project] - checkout del progetto"
+	cd ${SOURCE_HOME}/
+	svn checkout ${SVN_ADDRESS} >> ${LOGS_HOME}/${LOG_FILE}
+	
+	if [ $? -ne 0 ]
+	then
+		echo "[checkout_project] - errore durante il checkout del progetto"
+		cat ${LOGS_HOME}/${LOG_FILE} | mailx  -s "${MAIL_SUBJECT}" "${MAIL_ADDRESS}" 
+		exit 1
+	fi
+}
+
+function getwarfilename {
+	ls -R ${BUILD_HOME}/bpm-webapp/target/${PROJECT_NAME}*.war
+}
+
+function build_project {
+	echo "[build_project] - build del progetto"
+	cd ${BUILD_HOME}
+	mvn package -Dmaven.test.skip=true >> ${LOGS_HOME}/${LOG_FILE}
+	
+	if [ $? -ne 0 ]
+	then
+		echo "[build_project] - errore durante la build del progetto"
+		cat ${LOGS_HOME}/${LOG_FILE} | mailx -s "${MAIL_SUBJECT}" "${MAIL_ADDRESS}"
+		exit 1
+	fi
+}
+
+function delploy_project {
+	echo "[deploy_project] - deploy del progetto"
+       local WAR_NAME="`basename $(ls -R ${BUILD_HOME}/bpm-webapp/target/${PROJECT_NAME}*.war)`"
+	for user in ${DEPLOY_USERS[*]}
+    	do
+		echo "[deploy_project] - Copio il war ${WAR_NAME} nella cartella /home/${user}/CI"
+       	cp `getwarfilename`  /home/${user}/CI/${WAR_NAME}
+		echo "[deploy_project] - Modifica dei permessi"
+		chown ${user} /home/${user}/CI/${WAR_NAME}
+		chgrp ${user} /home/${user}/CI/${WAR_NAME}
+  
+    	done
+}
+
+function main {
+	echo "START SCRIPT CI"
+	selectSVN
+
+	clean_deploy_dir
+    	checkout_project
+    	build_project
+    	delploy_project
+    	echo "END SCRIPT CI"
+}
+
+main
