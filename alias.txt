@@ -1,0 +1,64 @@
+## Clear shortcut
+alias c='clear'
+
+## Sha
+alias sha='shasum -a 256 '
+
+## History shortcut
+alias h='history'
+
+## History timestamp
+export HISTTIMEFORMAT="%d/%m/%y %T "
+
+## LS
+alias ls='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias ld='ls -d */ --color=auto' # lista cartelle
+alias l.='ls -d .* --color=auto' # lista cartelle e file nascosti
+alias ll='ls -la'
+  
+## LESS
+alias less='less -N' # visualizzare numeri di riga
+
+## SHORTCUT PER CARTELLE
+alias C='cd ~/gcm/current/conf'
+alias F='cd /home/gcm01/flussi'
+alias L='cd ~/gcm/current/logs/'
+alias P='cd /c/Users/riccardo.zanchi/Progetti'
+
+## SHORTCUT PER FILE DI LOG
+alias log1='less ~/gcm/current/logs/invio_camp_batch_1.log'
+alias logc='less ~/gcm/current/logs/catalina.out'
+alias logo='less ~/gcm/current/logs/output.log'
+
+## SCRIPT
+alias deploy='/opt/bin/deploy.sh'
+alias startTomcat='~/gcm/bin/startTomcat.sh'
+alias stopTomcat='~/gcm/bin/stopTomcat.sh'
+
+## SFTP
+alias sftp_mapp='sftp bricocenter_it@ftp.email.bricocenter.it'
+alias sftp_mapp='sftp bricocenter_it@91.192.43.134'
+
+## PS
+alias psjava='ps -ef | grep java'
+
+## ROT13
+alias rot13='tr '\''A-Za-z'\'' '\''N-ZA-Mn-za-m'\'''
+
+# VI/VIM
+alias vi='vim'
+
+# WHICH
+alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+
+# Tomcat Start
+alias startTomcat='$TOMCAT_HOME/bin/startup.sh'
+
+# Tomcat stop
+alias stopTomcat='$TOMCAT_HOME/bin/shutdown.sh'
+
+# Tomcat log
+alias logc='less $TOMCAT_HOME/logs/catalina.out'
+
+

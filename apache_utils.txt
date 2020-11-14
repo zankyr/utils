@@ -1,0 +1,47 @@
+logc
+locate httpd
+locate httpd.conf
+less /etc/httpd/conf/httpd.conf
+locate ssl.conf
+less /etc/httpd/conf.d/ssl.conf
+apachectl -t -D DUMP_MODULES
+vi /etc/httpd/conf.d/ssl.conf
+su - root
+vi /etc/httpd/conf.d/ssl.conf
+su - root
+GFT-2015*
+su - root
+logc
+w
+stopTomcat.sh
+startTomcat.sh
+logc
+history
+
+ 
+ 
+root/GFT-2015*
+ 
+service httpd restart
+vi /etc/httpd/conf.d/ssl.conf
+
+
+RewriteCond %{REQUEST_URI} !^/(carta-web/.*)$
+RewriteRule ^/(.*)$ /carta-web/$1 [P,L]
+
+RewriteCond %{HTTP_HOST} ^cartabrico.gftitalia.it [nocase]
+RewriteRule ^/$ /carta-web/home.xhtml [R=301]
+RewriteCond %{HTTP_HOST} ^cartabrico.gftitalia.it [nocase]
+RewriteRule ^/$ /carta-web [R]
+
+#       RewriteRule ^/?iniziative/(.*) https://iniziative.gftitalia.it/iniziative/$1 [R=302]
+#       RewriteRule ^/?carta-web/private/(.*)      https://areapersonale.gftitalia.it/carta-web/private/$1      [R=302]
+
+
+# Credenziali root
+su - root
+GFT-2015*
+
+# Listare tutti i moduli caricati da apache
+apachectl -t -D DUMP_MODULES
+apachectl -M #(sinonimo per il comando precedente)

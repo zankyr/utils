@@ -12,6 +12,15 @@ psql postgres riccardo.zanchi
 > \list
 > \l
 
+# Creare db (ATTENZIONE CASE SENSITIVE)
+CREATE DATABASE pnx3; 
+
+# Creare utente con password
+create user pnx3 with encrypted password 'pnx3';
+
+# Associare ruoli a utente
+grant all privileges on database pnx3 to pnx3;
+
 # Selezionare db
 > \connect <db_name>
 > \c <db_name>

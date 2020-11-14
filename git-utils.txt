@@ -33,3 +33,32 @@ git commit -m "fixed untracked files"
 
 # Create new branch and checkout it
 git checkout -b <branch-name>
+
+# Fetchare tag
+git fetch --all --tags
+
+# Tag
+git tag -a v1.0 -m "Version 1.0"
+git push origin v1.0
+git push origin --tags
+
+# Show tags
+git tag
+
+# Current HEAD
+git rev-parse HEAD
+git rev-parse --short HEAD
+
+# Cambiare HEAD
+git reset --hard <commit-sha>
+
+# Remove local commit (not yet pushed) -> reset to the current head
+git reset --hard origin/feature/PNXTHREE-1785-timeout-a-15-minuti
+
+
+# Remove remote commit
+git reset --hard <commit_desiderato>
+git push --force
+
+# Multiple commands
+git --version; git branch
