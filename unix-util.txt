@@ -61,3 +61,9 @@ scp carta.bricocenter.it.csr cb01@10.34.3.133:~
 
 # Copiare file da subdirectory
 find archive/ -iname "*.war" -type f -exec cp '{}' ./ \;
+
+#  Dividere un file in 20 parti
+$ split -l$((`wc -l < panda_core.rapporti_sofferenze_me.txt`/20)) panda_core.rapporti_sofferenze_me.txt panda_core.rapporti_sofferenze_me.txt -da 2
+
+# Rimuovere il caratter NUL dal testo
+$ tr < panda_core.movimenti_sof.split.txt20 -d '\000' > test
