@@ -6,8 +6,6 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 # Immagine maven
 https://hub.docker.com/_/maven/
 
-
-
 # Scaricare immagine da docker hub
 $ docker pull <immagine>
 
@@ -56,19 +54,20 @@ $ docker history <image>
 # Lista porte esposte da container
 $ docker port <container>
 
-# Creazione immagine
-> Definire il file Dockerfile
-> $ docker build [-t <tag_da_assegnare_a_immagine] <path_del_dockerfile>
+## Creare immagine da file docker (Dockerfile)
+docker build -t img_run-env <path>
+OPTIONS:
+-t <nome_tag> : tag (nome) da assegnare all'immagine che si costruisce
 
-installare docker
+## Eseguire comando su container
+docker exec -itd cont_run-env bash
+!!! ATTENZIOEN, su Windows la console interattiva è eseguibile solo da Powershell, GitBash genera messaggio di errore the input device is not a TTY.  If you are using mintty, try prefixing the command with 'winpty'
 
-pull immagine maven
 
-clone (?) della repo
+##Creare volumi
+docker volume create <nome_volume>
+docker run -d --volume <nome_volume> <immagine>
 
-modifica pom per aggiungere  xlm bind
 
-build immagine
-
-docker run -d -p 8080:8080 test mvn spring-boot:run
-
+# Lista volumi
+docker volume ls
