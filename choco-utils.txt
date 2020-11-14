@@ -1,0 +1,4 @@
+## chocolatey list installed packages
+$ choco list --local-only
+oppure
+$ clist -l
