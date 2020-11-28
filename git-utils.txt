@@ -1,3 +1,6 @@
+# show remote
+git remote show origin
+
 # history di git
 git log
 
