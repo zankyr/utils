@@ -27,27 +27,39 @@ keytool -delete -alias adeo_services_infra_ca1 -keystore cacerts
 nmap --script ssl-enum-ciphers email.bricocenter.it
 
 
-/usr/local/bingft/jdk1.7.0_80/jre/bin/keytool -import -trustcacerts -alias ADEO_SERVICES_INFRA_CA2_P7B -file ADEO_SERVICES_INFRA_CA2.p7b -keystore /usr/local/bingft/jdk1.7.0_80/jre/lib/security/cacerts -storetype JCEKS
+/usr/local/bingft/jdk1.7.0_80/jre/bin/keytool -import -trustcacerts 
+-alias ADEO_SERVICES_INFRA_CA2_P7B -file ADEO_SERVICES_INFRA_CA2.p7b 
+-keystore /usr/local/bingft/jdk1.7.0_80/jre/lib/security/cacerts -storetype JCEKS
 
 
 
-/usr/local/bingft/jdk1.7.0_80/jre/bin/keytool -genkey -alias adeo_ldap -keystore /usr/local/bingft/jdk1.7.0_80/jre/lib/security/adeo_ldap.jks
+/usr/local/bingft/jdk1.7.0_80/jre/bin/keytool 
+-genkey -alias adeo_ldap -keystore /usr/local/bingft/jdk1.7.0_80/jre/lib/security/adeo_ldap.jks
 
 /usr/local/bingft/jdk1.7.0_80/jre/bin/keytool -delete -alias adeo_ldap -keystore /usr/local/bingft/jdk1.7.0_80/jre/lib/security/adeo_ldap.jks
 
-/usr/local/bingft/jdk1.7.0_80/jre/bin/keytool -v -importkeystore -srckeystore carta.bricocenter.it.p12 -srcstoretype PKCS12 -destkeystore /usr/local/bingft/jdk1.7.0_80/jre/lib/security/adeo_ldap.jks -deststoretype JKS
+/usr/local/bingft/jdk1.7.0_80/jre/bin/keytool 
+-v -importkeystore -srckeystore carta.bricocenter.it.p12 
+-srcstoretype PKCS12 
+-destkeystore /usr/local/bingft/jdk1.7.0_80/jre/lib/security/adeo_ldap.jks -deststoretype JKS
 
 Generare il certificato:
 
-keytool -genkey -alias cartabricocenter -keyalg RSA -keypass password -storepass password -keystore keystore.jks
+keytool -genkey -alias cartabricocenter -keyalg RSA 
+-keypass password -storepass password -keystore keystore.jks
 
-keytool -export -alias cartabricocenter -storepass password -file carta.cer -keystore keystore.jks
+keytool -export -alias cartabricocenter 
+-storepass password -file carta.cer -keystore keystore.jks
 
-keytool -genkey -alias authbricocenter -keyalg RSA -keypass password -storepass password -keystore keystore2.jks
+keytool -genkey -alias authbricocenter 
+-keyalg RSA -keypass password -storepass password -keystore keystore2.jks
 
-keytool -export -alias authbricocenter -storepass password -file auth.cer -keystore keystore2.jks
+keytool -export -alias authbricocenter 
+-storepass password -file auth.cer -keystore keystore2.jks
 
-keytool -import -v -trustcacerts -alias authbricocenter -file auth.cer -keystore keystore.jks -keypass password -storepass password
+keytool -import -v -trustcacerts 
+-alias authbricocenter -file auth.cer 
+-keystore keystore.jks -keypass password -storepass password
 
 Settare il keystore in server.xml:     <Connector SSLEnabled="true" clientAuth="false" maxThreads="150" port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol" scheme="https" secure="true" sslProtocol="TLS" keystoreFile="${user.home}/cert/keystore.jks" keystorePass="password"/>
 
@@ -76,7 +88,9 @@ Delete the created alias
 /opt/java/bin/keytool -delete -alias adeo_ldap -keystore  adeo_ldap.jks
 
 Import into the new created keyStore the key from the p12 file (refer to the attached document)
-/opt/java/bin/keytool -v -importkeystore -srckeystore /home/oc01/tmp_certificato/LDAP_GFT.p12 -srcstoretype PKCS12 -destkeystore adeo_ldap.jks -deststoretype JKS
+/opt/java/bin/keytool -v -importkeystore 
+-srckeystore /home/oc01/tmp_certificato/LDAP_GFT.p12 
+-srcstoretype PKCS12 -destkeystore adeo_ldap.jks -deststoretype JKS
 
 Tomcat configuration:
 Add the following parameters to the  JVM parameters to configure the trustStore and the keyStore
