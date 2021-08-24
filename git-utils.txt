@@ -1,20 +1,24 @@
 # show remote
-git remote show origin
+$ git remote show origin
 
 # history di git
-git log
+$ git log
 
 # history sul singolo file
-git log <file/path>
+$ git log <file/path>
 
 # history dettagliata (con modifiche effettuate)
-git log -p 
+$ git log -p 
 
 
-git reset --soft HEAD^ 
-git reset HEAD path/to/unwanted_file
-git commit -c ORIG_HEAD  
+$ git reset --soft HEAD^ 
+$ git reset HEAD path/to/unwanted_file
+$ git commit -c ORIG_HEAD  
 
+# List branches
+$ git branch # show local branches
+$ git branch -a # show local and remote branches
+$ git branch -r # show remote branches
 
 # Sincronizzare branch remota con locale
 git branch --set-upstream-to=origin/master
