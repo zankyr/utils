@@ -19,6 +19,10 @@ $ git commit -c ORIG_HEAD
 $ git branch # show local branches
 $ git branch -a # show local and remote branches
 $ git branch -r # show remote branches
+$ git branch --list 'SSO*' # list all branches whose name starts with 'SSO'
+
+# Remove branch
+git branch -D $(git branch --list 'SSO-*') # remove all branches starting with 'SSO-'
 
 # Sincronizzare branch remota con locale
 git branch --set-upstream-to=origin/master
@@ -26,6 +30,9 @@ git pull --allow-unrelated-histories
  
 # Reset file (not yet staged)
 git checkout -- <file> // ALL CHANGES WILL BE DISCARDED
+
+# Restore file from another branch
+git restore --source develop -- ../ita-sso-resky-webapp/src/main/java/com/ntt/web/tokentocookie/GetTknServlet.java
 
 # Unstage file
 git reset HEAD <file>
