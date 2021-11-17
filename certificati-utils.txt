@@ -1,4 +1,6 @@
+## Useful sources
 http://www.thinkplexx.com/learn/howto/security/tools/understanding-java-keytool-working-with-crt-files-fixing-certificate-problems
+https://www.sslshopper.com/article-most-common-java-keytool-keystore-commands.html
 
 # Convertire da txt a certificati
 mv file.txt file.crt
@@ -25,6 +27,9 @@ keytool -delete -alias adeo_services_infra_ca1 -keystore cacerts
 
 # Verificare versione ssl utilizzata da sito
 nmap --script ssl-enum-ciphers email.bricocenter.it
+
+# Scaricare certificato da sito
+$ openssl s_client -connect servizicollaudo.sky.it:443 | tee logfile
 
 
 /usr/local/bingft/jdk1.7.0_80/jre/bin/keytool -import -trustcacerts 
