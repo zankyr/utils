@@ -1,0 +1,27 @@
+# Change the theme
+## Verify what are the installed themes
+$ ls /usr/share/vim/vim74/colors/
+blue.vim      delek.vim    evening.vim  murphy.vim     README.txt  slate.vim
+darkblue.vim  desert.vim   koehler.vim  pablo.vim      ron.vim     torte.vim
+default.vim   elflord.vim  morning.vim  peachpuff.vim  shine.vim   zellner.vim
+
+## In vim, execute the command ":color <theme>", where <theme> is the name of the theme without the .vim extension
+
+## To make the theme the default:
+> Create the .vimrc file in the user directory
+> Add the instruction :color <theme>
+> save
+
+# Go to a specfic line
+<row-number>G
+43G
+
+# Enable/disable line numbers
+set number | set nonumber
+
+
+# Show the current mode (INSERT, VISUAL, etc.)
+set showmode
+
+# To avoid arrow keys to insert strange chars
+set nocompatible
