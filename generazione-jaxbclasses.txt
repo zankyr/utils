@@ -1,6 +1,0 @@
-Dalla cartella bin della opportuna jdk:
-xjc.exe -d “<folder>” -p <package> -wsdl <wsdl_location>
-
--d : directory dove generare package e classi 
--p : dichiarazione del package, es. it.gft.bricocenter.jaxbclasse
--wsdl : url da cui recuperare il wsdl

@@ -1,9 +1,0 @@
-Visualizzare timestamp con millisecondi
-
-> Format cells > Custom > [h]:mm:ss,000 
-
-Formattare celle alternate
-> Conditional formatting
-> New Rule
-> Use a formula to determine which cells to format
-> =EVEN(ROW())=ROW()
