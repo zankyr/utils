@@ -1,0 +1,9 @@
+## Weather
+curl v2.wttr.in/Milan
+
+## POST request with JSON payload
+curl \
+  --header "Content-type: application/json" \
+  --request POST \
+  --data '{"symbol":"GOOG","price":"600.00"}' \
+  http://localhost:8080/stocks/saveJsonStock
