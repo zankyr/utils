@@ -177,3 +177,50 @@ order by 1 desc;
 for i in (select constraint_name, table_name from user_constraints where table_name = 'GCM_GNX_VENDUTO') LOOP
 	execute immediate 'alter table '||i.table_name||' disable constraint '||i.constraint_name||'';
 end loop;
+
+
+## where con regex
+SELECT SURNAME 
+FROM SSO.USER_DATA  
+WHERE REGEXP_LIKE(SURNAME, '^[a-zA-Zà-ü]+(([[:space:]\''\,\.\-][a-zA-Zà-ü])?[a-zA-Zà-ü]*)*[\'']{0,1}$')
+
+
+## Ripulire una tabella troppo grande, per cui le DELETE sono poco performanti
+1 - creare una tabella identica (ovviamente con nome diverso), utilizzando lo stesso DDL della tabella esistente
+
+2 - abilitare l'esecuzione parallela
+$ ALTER SESSION force parallel query parallel 8;
+$ ALTER SESSION force parallel dml parallel 8;
+
+3 - Inserire nella nuova tabella solamente i record di interesse della vecchia tabella, utilizzando la modalità append per evitare cache
+$ INSERT /*+ append */ INTO GDPRUSR.GDPR_LOGS_BAK (LOG_DATE , LOG_LEVEL  , LOG_MSG, LOG_PROCEDURE)
+SELECT LOG_DATE , LOG_LEVEL  , LOG_MSG, LOG_PROCEDURE FROM GDPRUSR.GDPR_LOGS gl WHERE LOG_DATE >= TO_DATE('01-01-2022', 'DD-MM-YYYY') ;
+
+4 - committare
+$ COMMIT;
+
+
+5 - svuotare la tabella vecchia ed eliminarla
+TRUNCATE TABLE GDPR_LOGS_BCSS;
+DROP TABLE GDPR_LOGS_BCSS PURGE;
+
+## Cancellazione bulk
+1 - rimuovere eventuali indici sulla tabella
+
+2 - abilitare l'esecuzione parallela
+$ ALTER SESSION force parallel query parallel 8;
+$ ALTER SESSION force parallel dml parallel 8;
+
+3 - eseguire la cancellazione in modo parallelo
+DELETE /*+ PARALLEL(GDPR_LOGS) */
+FROM GDPR_LOGS gl 
+WHERE LOG_DATE >= TO_DATE('01/02/2022', 'dd/MM/YYYY') 
+  AND LOG_DATE < TO_DATE('10/02/2022', 'dd/MM/YYYY');
+
+4 - committare
+$ COMMIT;
+
+5 - ricreare gli indici eliminati al punto 1
+
+
+
