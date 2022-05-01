@@ -71,3 +71,9 @@ docker run -d --volume <nome_volume> <immagine>
 
 # Lista volumi
 docker volume ls
+
+# Copiare file da container a host
+$ docker cp <containerId>:/file/path/within/container /host/path/target
+
+# Copiare file da host a container
+$ docker cp /host/path/target <containerId>:/file/path/within/container 
