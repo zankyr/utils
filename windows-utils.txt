@@ -1,0 +1,31 @@
+## Windows 8 - create a wifi hotspot
+> netsh wlan set hostednetwork mode=allow ssid=<network-name> key=<network-password>
+> netsh wlan start hostednetwork
+> netsh wlan stop hostednetwork
+
+# Powershell - find files by name
+$ gci -recurse -filter "<file-name>" -File
+
+# SHA512
+Get-FileHash -algorithm SHA512 .\eclipse-inst-win64.exe | format-list
+
+# Reset Hyper-V server: 
+? it happened that all the VM's in Hyper-V disapperead 
+? Trying to re-connect the server, the following error was shown:
+https://shauncassells.wordpress.com/2018/05/24/fix-hyper-v-encountered-an-error-trying-to-access-an-object-on-computer-localhost-because-the-object-was-not-found-the-object-might-have-been-deleted-verify-that-the-virtual-machine-managemen/
+MOFCOMP %SYSTEMROOT%\System32\WindowsVirtualization.V2.mof
+
+# Setting Enviroment Variables
+$ setx <variable-name> <variable-value> # if the variable is already defined, this command will overwrite its value
+
+$ setx <variable-name> <"%VARIABILE%;<variable-value>"> # Add the new value to the already existing values
+
+# Show Environment variable value(s)
+> set <variable>
+
+# Setting Java Path
+$  setx path "%path%;<path/to/jdk>\bin"
+
+> Check if the path was added
+$ echo %PATH%
+$ echo %JAVA_HOME%
