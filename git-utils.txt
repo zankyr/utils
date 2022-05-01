@@ -1,0 +1,83 @@
+# show remote
+$ git remote show origin
+
+# History
+$ git log [OPTIONS][FILE]
+
+OPTIONS:
+- `-p`: add details
+
+FILE:
+- if present, will show the history of the specified file
+- if not presente, will show the history of the entire branch
+
+# List branches
+$ git branch [OPTIONS] # show local branches
+
+OPTIONS:
+- `-a` : show local and remote branches
+- `-r` : show remote branches
+- `--list 'SSO*'` : list all branches whose name starts with 'SSO'
+
+# Remove branch
+$ git branch -D $(git branch --list 'SSO-*') # remove all branches starting with 'SSO-'
+
+# Sync remote branch with local
+$ git branch --set-upstream-to=origin/master
+$ git pull --allow-unrelated-histories
+ 
+# Reset file (not yet staged)
+$ git checkout -- <file> // ALL CHANGES WILL BE DISCARDED
+
+# Restore file from another branch
+$ git restore --source develop -- /path/to/file
+
+# Unstage file
+$ git reset HEAD <file>
+
+# Remove staged file
+$ git rm --cached <file>
+
+# Fixing untracked files
+$ git rm -r --cached . // N.B. removes all the files from git
+$ git add .
+$ git commit -m "fixed untracked files"
+
+# Create new branch and checkout it
+$ git checkout -b <branch-name>
+
+# Fetch tags
+$ git fetch --all --tags
+
+# Create and push tag
+$ git tag -a v1.0 -m "Version 1.0"
+$ git push origin v1.0
+$ git push origin --tags
+
+# Show tags
+$ git tag
+
+# Checkout from tag
+$ git checkout tags/v1.3.5.2 -b release/1.3.5.3
+
+# Current HEAD
+$ git rev-parse HEAD
+$ git rev-parse --short HEAD
+
+# Change HEAD
+$ git reset --hard <commit-sha>
+
+# Remove local commit (not yet pushed) -> reset to the current head
+$ git reset --hard origin/feature/PNXTHREE-1785-timeout-a-15-minuti
+
+
+# Remove remote commit
+$ git reset --hard <commit>
+$ git push --force
+
+# Multiple commands
+$ git --version; git branch
+
+# Remove all local branches but develop and master
+$ git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master\|main\|develop" | xargs git branch -D
+
