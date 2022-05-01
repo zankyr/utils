@@ -1,0 +1,56 @@
+cp flussi_201703{18,19,20,21}_{0506,0453,0032,0391}.zip ~
+
+for FILENAME in *.*; do mv "$FILENAME" "${FILENAME%.*}";  done
+
+
+
+# Find folders not conaining a specific file
+$ find . -mindepth 1 -maxdepth 1 -type d '!' -exec test -e "{}/meta.xml" ';' -print
+
+# Delete empty files (dimensin is zero)
+$ find . -size 0 -print0 | xargs -0 rm
+
+# Search file containing a string
+$ grep -r somethingtosearch temp/*.log
+$ grep -Ril "specific_text" directory
+> -l show only the file name and not the row number
+-R, -r recursive. `-r` is not supported by all the grep versions, and it doesn't 					follow the symbolic links
+		
+# Show environment variables
+$ env
+
+# Session variable
+$ export <VARIABLE>="value"
+$ export <VARIABLE>=$VARIABLE:<path>
+
+# Zip a folder
+zip -r <name>.zip /path/to/the/folder
+
+# Distro info
+$ lsb_release -a
+$ cat /etc/issue
+$ cat /etc/issue.net
+$ cat centos-release (CentOS)
+
+$ Architecture info
+$ uname -a
+$ uname -i
+
+# Install sudo
+> Log as root
+$ apt install sudo
+
+# Modify /etc/sudoers
+$ visudo
+
+
+# Change editor
+$ update-alternatives --config editor
+
+# Define vim as default editor for crontab
+$ export VISUAL=vim
+(or)
+$ export EDITOR=vim
+
+# Copy file from ssubdirectory
+$ find archive/ -iname "*.war" -type f -exec cp '{}' ./ \;
