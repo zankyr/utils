@@ -1,0 +1,33 @@
+# Useful sources
+- http://www.thinkplexx.com/learn/howto/security/tools/understanding-java-keytool-working-with-crt-files-fixing-certificate-problems
+- https://www.sslshopper.com/article-most-common-java-keytool-keystore-commands.html
+- http://www.mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/
+
+# Convert from txt to crt
+$ mv file.txt file.crt
+
+# List certificates in cacerts
+$ keytool -list -v -keystore cacerts
+
+# List certificate by alias
+$ keytool -list -v -keystore cacerts -alias <ALIAS>
+
+# Export installed certificates
+$ keytool -list -v -keystore keystore_name > keystore_output.txt
+$ keytool -exportcert -storepass changeit -keystore $JAVA_HOME/jre/lib/security/cacerts -alias mycert1 > my.cert.location/my.cert.1.crt
+
+# Convert pfx
+$ openssl pkcs12 -in input.pfx -out mycerts.crt -nokeys -clcerts
+
+# Add a certificate
+$ keytool -import -trustcacerts -alias <ALIAS> -file </path/to/certificate/to/add> -keystore cacerts
+$ keytool -import -file myCer.crt -storepass changeit -keystore cacerts -alias myAlias
+
+# Remove a certificate
+$ keytool -delete -alias myAlias -keystore cacerts
+
+# Check the SSL version used by a site
+$ nmap --script ssl-enum-ciphers example.com
+
+# Retrieve the certificate from a site
+$ openssl s_client -connect example.com:443 | tee logfile
