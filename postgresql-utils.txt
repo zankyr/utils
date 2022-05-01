@@ -1,0 +1,44 @@
+# Connect to the db server
+$ psql -h <host> -U <user>
+$ psql <database> <user>
+
+# Logout from server
+$ \q
+
+# List databases
+$ \list
+$ \l
+
+# Create a database (case-sensitive)
+$ CREATE DATABASE <NAME>; 
+
+# Create a user with password
+$ create user <NAME> with encrypted password '<PWD>';
+
+# Assign roles to a user
+$ grant all privileges on database <DATABASE> to <USER>;
+
+# Connect to a database
+$ \connect <db_name>
+$ \c <db_name>
+
+# List objects (tables, views, sequences, ...). Adding `+` to the following commands will show the extended description
+# \d
+
+# List tables
+# \dt
+
+# List views
+> \dv
+
+# List sequences
+>\ds
+
+# Execute a script from command line
+$ psql -h 127.0.0.1 -U postgres -W -f select.sql <table>
+
+# Show the schema of a table
+$ \d[+] <TABLE>q
+
+# Copy values from table to a CSV file
+$ COPY <TABLE> TO '</path/to/csv>' CSV HEADER;
