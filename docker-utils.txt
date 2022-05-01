@@ -1,0 +1,73 @@
+# Download a Docker image from Dockerhub
+$ docker pull <image>
+
+# List all the local images
+$ docker images
+
+# Show the details of an image
+$ docker inspect <image>
+
+# Delete a local image
+$ docker rmi <image>
+$ docker rm <image_id>
+
+# Create a container
+$ docker run <image> [COMMAND]
+$ docker run --rm <image> # the container is removed once stopped
+$ docker run <image> -it # create the container with an interactive session
+$ docker run --name <container-name> <image> # create the container with a specified name
+$ docker run -d <image> # run the container in detached (background) mode
+$ docker run -P <image> # all the exposed ports of the conteiner are mapped to (random) ports of the host
+$ docker run -p <host_port>:<container_port> <image> # maps the specified container port to the specified host port
+e.g. $ docker run -p 8888:80 <image>
+
+# Stop the container
+$ docker stop <container>
+
+# Re-start a stopped container
+$ docker start <container>
+
+# List containers
+$ docker ps [OPTIONS]
+OPTIONS:
+> -a : all containers (running and stopped)
+> -q : show only the containers ID
+> -f : filter the containers
+
+# Remove containers
+$ docker container rm <container ID>
+$ docker rm <container_id>
+$ docker rm $(docker ps -aqf status=exited) # remove all the stopped containers
+$ docker container prune # remove all the stopped containers
+
+# Image history
+$ docker history <image>
+
+# List the ports exposed by a container
+$ docker port <container>
+
+# Create an image from the Dockerfile
+$ docker build [OPTIONS] <path/of/Dockerfile>
+OPTIONS:
+-t <TAG> : tag (label) to assign to the image
+
+# Execute a command in the container
+$ docker exec -it <container> <command>
+example: docker exec -it <container> /bin/bash
+
+NOTE: on Windows the interactive console can be execute only using Powershell
+
+
+# Create volumes
+$ docker volume create <volume_name>
+$ docker run -d --volume <volume_name> <image>
+
+
+# List volumes
+$ docker volume ls
+
+# Copy file from container to host
+$ docker cp <containerId>:/file/path/within/container /host/path/target
+
+# Copy file from host to container
+$ docker cp /host/path/target <containerId>:/file/path/within/container 
