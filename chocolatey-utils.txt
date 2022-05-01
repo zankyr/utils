@@ -1,0 +1,6 @@
+## List the installed packages
+$ choco list --local-only
+$ clist -l
+
+## Upgrade all installed packages
+$ choco upgrade all
