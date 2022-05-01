@@ -59,6 +59,10 @@ git push origin --tags
 # Show tags
 git tag
 
+# Checkout from tag
+$ git checkout tags/v1.3.5.2 -b release/1.3.5.3
+
+
 # Current HEAD
 git rev-parse HEAD
 git rev-parse --short HEAD
@@ -76,3 +80,7 @@ git push --force
 
 # Multiple commands
 git --version; git branch
+
+# Remove all local branches but develop and master
+$ git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master\|main\|develop" | xargs git branch -D
+
