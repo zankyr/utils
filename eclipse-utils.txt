@@ -1,0 +1,28 @@
+# Add resources folder to a project
+> Right-click on Project/module
+> Build Path > Configure Build Path... > Source > Add Folder
+> Select the root folder (e.g. src/main) > Create New Folder... > Select the folder name (e.g. resources) > OK
+> Right-click on project/module > Maven > update
+
+# Missing src/main/java and/or src/main/test folders
+> Create the missing folder(s) in the project filesystem
+> Update the Maven project
+
+# Speed up the project turning off validations
+> Windows > Preferences > Validation
+> Check 'Suspend all validators' and confirm
+
+# Install ColorTheme
+> Help > Install new software...
+> In the 'Work with' box, insert the URL https://eclipse-color-theme.github.io/update/ 
+> Click "Add..."
+> Continue with the installation
+
+# Reset a blocked workbench from filesystem (e.g. when parsing .js files crashes the application)
+> Delete the .xmi file in the "<workspace_dir>/.metadata/.plugins/org.eclipse.e4.workbench/" folder
+
+# Unknown error in pom.xml
+https://stackoverflow.com/questions/56142369/why-am-i-getting-unknown-error-in-line-1-of-pom-xml
+Issue https://bugs.eclipse.org/bugs/show_bug.cgi?id=547340#c9
+
+The solution is to install the plugin "https://download.eclipse.org/m2e-wtp/releases/1.4/"
