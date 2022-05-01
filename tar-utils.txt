@@ -1,0 +1,26 @@
+# Create an archive 
+$ tar -cvf <archive-name>.tar <file-to-archive>
+
+# Create a gzip archive 
+$ tar -cvzf <archive-name>.tgz <file-to-archive>
+$ tar -cvzf  <archive-name>.tar.gz <file-to-archive>
+
+
+# Create a bz2 archive 
+tar -cvjf <archive-name>.bz2 <file-to-archive>
+tar -cvjf <archive-name>.tar.tbz <file-to-archive>
+tar -cvjf <archive-name>.tar.tb2 <file-to-archive>
+
+
+# Add files or folders to an archive
+$ tar -rvf <archive.tar> <file>
+
+
+# Extract an archive
+$ tar -xvf <archive> [-C <output-directory>]
+
+# Extract a specific file from the archive
+$ tar --extract --file=<archive> <file>
+
+# List archive content
+$ tar -tvf <archive>
