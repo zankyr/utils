@@ -1,0 +1,12 @@
+##  assert objects are equal field by field
+// using mockito - failing tests not show the differences
+assertTrue(new ReflectionEquals(expected).matches(result));
+
+// assertj - it is null safe
+Assertions.assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
+
+
+## Mockito Argument Matcher - spcifiy a collection where the order is not important
+Mockito.when(mockSaleContractRepository.findAllByIdInWithEagerRelationships(ArgumentMatchers.argThat(argument -> argument.containsAll(List.of(availableSale1.getSale().getId(), availableSale2.getSale().getId())))))
+.thenReturn(List.of(availableSale1.getSale(), availableSale2.getSale()));
+

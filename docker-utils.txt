@@ -4,12 +4,21 @@ $ docker pull <image>
 # List all the local images
 $ docker images
 
+# List the images by patter
+$ docker images | grep ita-sso
+
 # Show the details of an image
 $ docker inspect <image>
 
 # Delete a local image
 $ docker rmi <image>
 $ docker rm <image_id>
+
+# Delete all the untagged images
+$ docker image prune
+
+# Delete images by patter
+$ docker rmi $(docker images | grep ita-sso)
 
 # Create a container
 $ docker run <image> [COMMAND]

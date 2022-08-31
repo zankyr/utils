@@ -1,0 +1,6 @@
+select sequence_owner, sequence_name from dba_sequences;
+
+
+DBA_SEQUENCES -- all sequences that exist 
+ALL_SEQUENCES  -- all sequences that you have permission to see 
+USER_SEQUENCES  -- all sequences that you own

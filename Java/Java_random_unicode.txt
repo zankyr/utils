@@ -1,0 +1,25 @@
+@Test
+    public void test() {
+        
+        StringBuilder sb = new StringBuilder();
+        
+        // spazio = 20
+        
+        // Lettere maiuscole
+        for (int i = 65; i <= 90; i++)
+            sb.append(Character.toString((char) i));
+        
+        sb.append("\n");
+        
+        // Lettere minuscole
+        for (int i = 97; i <= 122; i++)
+            sb.append(Character.toString((char) i));
+        
+        log.info(sb.toString());
+    }
+    
+ // Random con estremi
+ThreadLocalRandom.current().nextInt(65, 91)
+
+// Random superiore ad un numero
+ThreadLocalRandom.current().nextInt() + 4

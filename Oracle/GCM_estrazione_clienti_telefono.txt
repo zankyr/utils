@@ -1,0 +1,44 @@
+DECLARE
+  CURSOR c1 is 
+    select mag_ref, num_carte, phone
+    from gcm_sirius_cliente
+    where num_carte is not null
+      and OPTIN1 = 1 and optin2 = 1 and optin3 = 1 -- cliente deve aver accettato gestione privacy etc
+      and STATUS_CARTE = 1 and DATE_DESACTIVATION_CARTE is null -- carta attiva
+      and PHONE is not null
+      and type_carte = 2
+      order by mag_ref;
+  my_mag NUMBER(38);
+  my_carte VARCHAR2(20);
+  my_phone VARCHAR2(25);
+  
+BEGIN
+ FOR customer IN c1 LOOP
+    my_mag := customer.mag_ref;
+    my_phone := replace(customer.phone, ' ', '');
+    my_carte := customer.num_carte;
+    
+    my_phone := replace(my_phone, ',', '');
+    
+   IF REGEXP_LIKE(my_phone, '^039') OR REGEXP_LIKE(my_phone, '^\+39') 
+      THEN my_phone := SUBSTR(my_phone, 4);
+    ELSIF REGEXP_LIKE(my_phone, '^0039') 
+      THEN my_phone := SUBSTR(my_phone, 5);
+    END IF;
+    
+    
+    IF NOT REGEXP_LIKE(my_phone, '^3') 
+      THEN my_phone := '';
+    END IF;
+    
+    IF LENGTH(my_phone) < 9 OR LENGTH(my_phone) > 10 
+      THEN my_phone := '';
+      ELSE my_phone := '+39' || my_phone;
+    END IF;
+    
+    INSERT INTO customer_temp_2 VALUES(my_mag, my_carte,my_phone, customer.phone);
+    COMMIT;
+  END LOOP;
+  
+  
+END;

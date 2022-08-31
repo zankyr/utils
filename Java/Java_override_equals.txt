@@ -1,0 +1,26 @@
+	@Override
+	public boolean equals(Object other) {
+		// check if the argument == null
+		if (other == null)
+			return false;
+		
+		// check if the argument == this
+		if (other == this)
+			return true;
+			
+		// use instance of to check for correct type
+		if (!(other instanceof Proposta))
+			return false;
+
+		// cast to correct type
+		Proposta otherIniziativa = (Proposta) other;
+
+		// compare significant fields
+		return otherIniziativa.id == id;
+
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}

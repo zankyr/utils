@@ -1,0 +1,13 @@
+// connettersi al db server con utenza e pwd
+$ sqlcmd -S vitXX-host.domain.com -U user -P password
+
+// connettersi al db con utenza e pwd
+$ sqlcmd -S vitXX-host.domain.com -U user -P password -d PANDA_X_07 
+
+// eseguire script
+$ sqlcmd -S vitXX-host.domain.com -U user -P password -d PANDA_X_07  -i input.sql -o output.txt
+
+// (una volta connessi) selezionare il db PANDA_X_07
+1> USE PANDA_X_07;
+2> GO
+

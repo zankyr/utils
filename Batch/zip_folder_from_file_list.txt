@@ -1,0 +1,29 @@
+#!/bin/bash
+
+SEARCH_DIR_PATH=$HOME/gcm/current/layout/layout_unzip
+
+while IFS='' read -r line || [[ -n "$line" ]]; do
+        zip -r $line $SEARCH_DIR_PATH/$line
+done < $1
+
+
+
+
+#!/bin/bash
+
+INPUT_FILE=$(pwd)/$1
+
+SEARCH_DIR_PATH=$HOME/gcm/current/layout/layout_unzip
+OUTPUT_DIR_PATH=$HOME/test_read
+
+cd $SEARCH_DIR_PATH
+
+while IFS='' read -r line || [[ -n "$line" ]]; do
+        zip -r $OUTPUT_DIR_PATH/$line $line
+done < $INPUT_FILE
+
+
+
+
+
+
