@@ -38,6 +38,11 @@ $ git reset HEAD <file>
 # Remove staged file
 $ git rm --cached <file>
 
+# Remove a commited file/directory from the versioning control
+- Create or update the .gitignore file adding the path of the file/directory to ignore
+- Execute the command `$ git rm [-r] --cached <file>` (the `-r` option is required if removing a directory)
+- Commit and push the changes
+
 # Fixing untracked files
 $ git rm -r --cached . // N.B. removes all the files from git
 $ git add .
