@@ -21,7 +21,7 @@ OPTIONS:
 
 # Remove branch
 $ git branch -D $(git branch --list 'SSO-*') # remove all branches starting with 'SSO-'
-
+	
 # Sync remote branch with local
 $ git branch --set-upstream-to=origin/master
 $ git pull --allow-unrelated-histories
@@ -86,3 +86,8 @@ $ git --version; git branch
 # Remove all local branches but develop and master
 $ git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master\|main\|develop" | xargs git branch -D
 
+# Create remote from current branch (e.g. when you changed the local branch name and want to push it to its own remote)
+$ git push origin HEAD
+
+# allow empty commit (no file modified)
+$ git commit --allow-empty  -m 'Start working on ledger exercise'
