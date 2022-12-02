@@ -90,4 +90,4 @@ $ git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master\|mai
 $ git push origin HEAD
 
 # allow empty commit (no file modified)
-$ git commit --allow-empty  -m 'Start working on ledger exercise'
+$ git commit --allow-empty  -m 'Start working on ledger exercise'	

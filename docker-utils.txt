@@ -80,3 +80,25 @@ $ docker cp <containerId>:/file/path/within/container /host/path/target
 
 # Copy file from host to container
 $ docker cp /host/path/target <containerId>:/file/path/within/container 
+
+## Bind point: the content of the container path is obscured by the binding point
+### Possible solution: multiple binding points?
+
+docker run -d \
+  -it \
+  --name test \
+  --mount type=bind,source="$(pwd)",target=/HiGHS/build/bin \
+  highs:latest
+
+
+# Volume
+## If the volume does not exist, it is created by the container
+## No content is overwrote
+  docker run -d \
+  -it \
+  --name test \
+  --mount source=test-vol,target=/HiGHS/build/bin \
+  highs:latest
+
+# Remove all stopped containersm all networks not used by at least one container, all volumes not used by at least one container, all dangling images, all dangling build cache, all networks not used by at least one container
+$ docker system prune --volumes
