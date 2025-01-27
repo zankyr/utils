@@ -91,3 +91,15 @@ $ git push origin HEAD
 
 # allow empty commit (no file modified)
 $ git commit --allow-empty  -m 'Start working on ledger exercise'	
+
+# List tags by tag
+git tag --list 'stack-dev-v0.9*'
+
+# Delete all local tags
+git tag -d $(git tag -l)
+
+# Remove tags by name
+git tag -d $(git tag -l) # First delete all local tags
+git fetch # Then, synchronize local with remote
+git push origin --delete $(git tag -l) # Delete all remote tags
+git tag -d $(git tag -l) # Delete again all local tags, 
